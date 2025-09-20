@@ -1,0 +1,21 @@
+name: build
+run-name: build
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sudo apt -y update
+          sudo apt install -y mingw-w64
+          cd decrypt
+          CC=i686-w64-mingw32-gcc make
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: decrypt.exe
+          path: |
+            decrypt/decrypt.exe
