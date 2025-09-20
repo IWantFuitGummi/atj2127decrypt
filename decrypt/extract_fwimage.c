@@ -1,11 +1,10 @@
 #include <getopt.h>
 #include <stdio.h>
 #include <string.h>
-#include <sys/errno.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <sys/uio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <ctype.h>
@@ -124,7 +123,11 @@ extract_fwimage_from_file(char *filename, char *output_dir)
 	struct stat thestat;
 	uint8_t *buf;
 
+#ifdef _WIN32
+	if (stat(filename, &thestat) == -1) {
+#else
 	if (lstat(filename, &thestat) == -1) {
+#endif
 		fprintf(stderr, "Couldn't stat %s: %s\n", filename, strerror(errno));
 		return -1;
 	}
