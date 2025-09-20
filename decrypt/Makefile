@@ -1,6 +1,6 @@
-CC = gcc
-CFLAGS = -c -g -Wall -m32 -std=c99 -O2 -I ../include
-LDFLAGS = -m32
+CC ?= gcc
+CFLAGS = -c -g -Wall -std=c99 -O2 -I ../include -D_DEFAULT_SOURCE
+LDFLAGS = 
 
 ifeq ($(shell uname -s),Darwin)
 	CFFLAGS += -arch i386

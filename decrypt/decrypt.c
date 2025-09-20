@@ -406,7 +406,11 @@ int dump_firmware(char *filename_in, char *output_dir, bool split, bool dfuscrip
 		//return -1;
 		printf("Output directory %s exists and its contents will be overwritten.\n", output_dir);
 	} else {
+#ifdef _WIN32
+		if(mkdir(output_dir) != 0) {
+#else
 		if(mkdir(output_dir, 0777) != 0) {
+#endif
 			perror("mkdir");
 			return -1;
 		}
