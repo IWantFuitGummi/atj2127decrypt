@@ -1,10 +1,10 @@
-name: build
-run-name: build
+name: builda
+run-name: builda
 on:
   workflow_dispatch:
 jobs:
-  build:
-    name: build
+  builda:
+    name: builda
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
