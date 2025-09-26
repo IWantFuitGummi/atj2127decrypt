@@ -1,0 +1,21 @@
+name: buildb
+run-name: buildb
+on:
+  workflow_dispatch:
+jobs:
+  buildb:
+    name: buildb
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sudo apt -y update
+          sudo apt install -y mingw-w64
+          cd fwimage
+          CC=i686-w64-mingw32-gcc make
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: fwimage.exe
+          path: |
+            fwimage/fwimage.exe
