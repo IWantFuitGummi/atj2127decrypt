@@ -11,6 +11,7 @@ jobs:
       - run: |
           sudo apt -y update
           sudo apt install -y mingw-w64
+          sudo dnf install glibc-headers
           cd fwimage
           CC=i686-w64-mingw32-gcc make
       - name: Upload
